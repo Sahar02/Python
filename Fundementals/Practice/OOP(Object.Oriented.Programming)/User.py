@@ -1,45 +1,39 @@
 class User:
-    Bank_Account = "Credit Union"
-    def __init__(self,name):
-        self.name = name
-        self.account_balance = 0
-
-    def make_deposit(self,amount):
-        self.account_balance+=amount
-
-    def make_withdrawal(self,amount):
-        self.account_balance-=amount
-
-    def  transfer_money(self, amount,user):
-        self.account_balance-=amount
-        user.account_balance+=amount
-
-    def display_user_balance(self):
-        print(f" User: {self.name}, Balance: {self.account_balance}")
     
+    def __init__(self,first_name,last_name,email,age):
+        
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.age = age
+        self.is_rewards_member = False
+        self.gold_card_points = 0
 
-women = User("Helen")
-women.make_deposit(50)
-women.make_deposit(100)
-women.make_deposit(25)
-women.make_withdrawal(-50)
-women.display_user_balance()
+    def display_info(self):
+        print(f"\n{self.first_name} {self.last_name}\n{self.email}\n{self.age}\n{self.is_rewards_member}\n{self.gold_card_points}")
 
-male = User("Bob")
-male.make_deposit(400)
-male.make_withdrawal(1000)
-male.make_withdrawal(-200)
-male.make_withdrawal(-80)
-male.display_user_balance()
+    def enroll(self):
+        if self.is_rewards_member:
+            print("User already a member")
+            return False
 
-teen = User("Sara")
-teen.make_deposit(500)
-teen.make_withdrawal(20)
-teen.make_withdrawal(100)
-teen.make_withdrawal(60)
-teen.display_user_balance()
+        self.is_rewards_member = True
+        self.gold_card_points = 500
 
-women.transfer_money(50,teen)
-women.display_user_balance()
+    def spend_points(self, amount):
+        if self.gold_card_points < amount:
+            return False
+        self.gold_card_points-=amount
 
-teen.display_user_balance()
+Matt = User("Matt","Von","MattV@CodingDojo.com",18)
+Matt.enroll()
+Matt.spend_points(50)
+Matt.display_info()
+
+Layla = User('Layla','Attwood','AttwoodLayla@CodingDojo.com',25)
+Layla.enroll()
+Layla.spend_points(80)
+Layla.display_info()
+
+Ben = User('Ben','Jim','BenJ@CodingDojo.com',16)
+Ben.display_info()
