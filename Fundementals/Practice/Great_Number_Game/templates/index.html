@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <title>Great Number Game</title>
+    <style>
+        h1,p{
+            text-align: center;
+        }
+        form,div{
+            display: flex;
+            justify-content: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Welcome To The Great Number Game</h1>
+    <p>I am thinking of a number 1-100</p>
+    <form action="/submit" method="post">
+        <input type="text" name="guess number">
+        <input type="submit" value="guess">
+    </form>
+    <div>
+    {% if 'number' in session %}
+        {% if session['number'] == session['num'] %}
+            <h2>you're correct!</h2>
+        {% elif session['number'] > session['num'] %}
+            <h2>Too High!</h2>
+        {% else%}
+            <h2>Too Low!</h2>
+        {% endif %}
+    {% endif %}
+    </div>
+</body>
+</html>
